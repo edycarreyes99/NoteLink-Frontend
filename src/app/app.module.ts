@@ -4,10 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {NotesModule} from "./modules/notes/notes.module";
+import { SidenavComponent } from './core/components/sidenav/sidenav.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SidenavComponent
   ],
   imports: [
     BrowserModule,
