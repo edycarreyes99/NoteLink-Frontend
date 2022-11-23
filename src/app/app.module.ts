@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {NotesModule} from "./modules/notes/notes.module";
 import { SidenavComponent } from './core/components/sidenav/sidenav.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { SidenavComponent } from './core/components/sidenav/sidenav.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NotesModule
+    NotesModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
