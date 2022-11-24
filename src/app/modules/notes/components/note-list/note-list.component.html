@@ -1,8 +1,12 @@
 <div class="note-list-component">
   <span class="text-secondary ms-2 fw-semibold">ALL NOTES</span>
   <ngx-masonry [options]="{resize: true}" [ordered]="true">
-    <div ngxMasonryItem [prepend]="true" class="col-sm-12 col-md-4 col-lg-3 col-xl-3 col-xxl-3 p-1" *ngFor="let note of notes">
-      <app-note-list-item [note]="note"></app-note-list-item>
+    <div
+      ngxMasonryItem
+      [prepend]="true"
+      class="col-sm-12 col-md-4 col-lg-3 col-xl-3 col-xxl-3 p-1"
+      *ngFor="let note of notes">
+      <app-note-list-item [note]="note" (noteManaged)="getNotes();"></app-note-list-item>
     </div>
   </ngx-masonry>
 </div>

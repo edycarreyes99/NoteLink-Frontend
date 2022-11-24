@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { NotesRoutingModule } from './notes-routing.module';
-import { NotesViewComponent } from './components/notes-view/notes-view.component';
-import { ManageNoteFormComponent } from './components/manage-note-form/manage-note-form.component';
+import {NotesRoutingModule} from './notes-routing.module';
+import {NotesViewComponent} from './components/notes-view/notes-view.component';
+import {ManageNoteFormComponent} from './components/manage-note-form/manage-note-form.component';
 import {MatCardModule} from "@angular/material/card";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatButtonModule} from "@angular/material/button";
@@ -14,10 +14,11 @@ import {MatMenuModule} from "@angular/material/menu";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {NotesService} from "./services/notes.service";
-import { NoteListComponent } from './components/note-list/note-list.component';
-import { NoteListItemComponent } from './components/note-list-item/note-list-item.component';
+import {NoteListComponent} from './components/note-list/note-list.component';
+import {NoteListItemComponent} from './components/note-list-item/note-list-item.component';
 import {NgxMasonryModule} from "ngx-masonry";
-import { ManageNoteModalComponent } from './components/modals/manage-note-modal/manage-note-modal.component';
+import {ManageNoteModalComponent} from './components/modals/manage-note-modal/manage-note-modal.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -40,8 +41,16 @@ import { ManageNoteModalComponent } from './components/modals/manage-note-modal/
     MatMenuModule,
     ReactiveFormsModule,
     MatProgressBarModule,
-    NgxMasonryModule
+    NgxMasonryModule,
+    MatDialogModule
   ],
-  providers: [NotesService]
+  providers: [
+    NotesService,
+    ManageNoteModalComponent
+  ],
+  entryComponents: [
+    ManageNoteModalComponent
+  ]
 })
-export class NotesModule { }
+export class NotesModule {
+}

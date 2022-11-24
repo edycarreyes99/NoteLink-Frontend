@@ -1,6 +1,8 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Note} from "../../interfaces/note";
 import {UploadImageService} from "../../../../core/services/upload-image/upload-image.service";
+import {MatDialog} from "@angular/material/dialog";
+import {ManageNoteModalComponent} from "../modals/manage-note-modal/manage-note-modal.component";
 
 @Component({
   selector: 'app-note-list-item',
@@ -10,6 +12,9 @@ import {UploadImageService} from "../../../../core/services/upload-image/upload-
 export class NoteListItemComponent {
   // Input variables
   @Input() note: Note | undefined;
+
+  // Output variables
+  @Output() noteManaged: EventEmitter<Note>
 
   // Component variables
   colors: { name: string, color: string }[] = [
@@ -27,7 +32,9 @@ export class NoteListItemComponent {
 
   constructor(
     private uploadImageService: UploadImageService,
+    private matDialog: MatDialog
   ) {
+    this.noteManaged = new EventEmitter<Note>();
   }
 
   // Method to remove the image from the note
@@ -54,7 +61,22 @@ export class NoteListItemComponent {
   }
 
   // Method to delete a note
-  deleteNote() {
-
+  deleteNote(): void {
+    this.matDialog.open(ManageNoteModalComponent, {
+      disableClose: true,
+      data: {
+        manageType: 'Delete',
+        note: this.note,
+      }
+    }).afterClosed().subscribe({
+      next: (note: Note) => {
+        if (note) {
+          this.noteManaged.emit(note);
+        }
+      },
+      error: (error) => {
+        console.error('Error closing modal:', error);
+      }
+    })
   }
 }
