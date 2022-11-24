@@ -11,7 +11,11 @@
         class="w-100"
         alt="Note Image">
 
-      <button mat-icon-button class="delete-image-button" matTooltip="Remove Image" (click)="removeNoteImage(); imagePicker.value = ''">
+      <button
+        mat-icon-button
+        class="delete-image-button"
+        matTooltip="Remove Image"
+        (click)="removeNoteImage(); imagePicker.value = '';">
         <mat-icon>delete</mat-icon>
       </button>
     </div>
@@ -75,7 +79,7 @@
         <mat-icon class="material-icons-outlined">delete</mat-icon>
       </button>
 
-      <button mat-flat-button matTooltip="Close editing" class="ms-auto">
+      <button mat-flat-button matTooltip="Close editing" class="ms-auto" (click)="clearNoteForm()">
         Cancel
       </button>
     </mat-card-actions>

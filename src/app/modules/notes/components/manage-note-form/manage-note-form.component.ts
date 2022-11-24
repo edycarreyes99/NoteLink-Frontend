@@ -67,4 +67,15 @@ export class ManageNoteFormComponent {
   removeNoteImage(): void {
     this.getControl('images')?.setValue(['']);
   }
+
+  // Method to clear the note form
+  clearNoteForm(): void {
+    this.noteForm.patchValue({
+      id: null,
+      title: '',
+      description: '',
+      color: null,
+      images: ['']
+    });
+  }
 }
