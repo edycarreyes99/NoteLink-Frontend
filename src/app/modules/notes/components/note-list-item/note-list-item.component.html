@@ -1,1 +1,82 @@
-<p>note-list-item works!</p>
+<div class="note-list-item-component">
+  <mat-card
+    class="note-card rounded shadow-none border"
+    [style.background-color]="note?.color">
+
+    <div class="note-image" *ngIf="note?.images[0] !== ''">
+      <img
+        mat-card-image
+        [src]="note?.images[0]"
+        class="w-100"
+        alt="Note Image">
+
+      <button
+        mat-icon-button
+        class="delete-image-button"
+        matTooltip="Remove Image"
+        (click)="removeNoteImage(); imagePicker.value = '';">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+
+    <mat-card-header>
+      <mat-card-title>
+        <input
+          type="text"
+          placeholder="Title"
+          class="w-100 note-title fw-semibold text-dark"
+          [value]="note!.title"
+          [style.background-color]="note?.color">
+      </mat-card-title>
+      <mat-card-subtitle>
+        Last updated: {{note?.updated_at | date: 'medium'}}
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <textarea
+        [value]="note!.description"
+        class="w-100 note-description mt-3 text-dark"
+        cdkTextareaAutosize
+        cdkAutosizeMaxRows="28"
+        cdkAutosizeMinRows="2"
+        placeholder="Add a note..."
+        [style.background-color]="note?.color">
+      </textarea>
+      <mat-divider></mat-divider>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-icon-button matTooltip="Change color" [matMenuTriggerFor]="aboveMenu">
+        <mat-icon class="material-icons-outlined">palette</mat-icon>
+      </button>
+
+      <mat-menu #aboveMenu="matMenu" yPosition="above">
+        <button mat-menu-item (click)="setNoteColor(null)">
+          <mat-icon class="text-primary" *ngIf="note?.color === null">check</mat-icon>
+          <mat-icon class="material-icons-outlined">format_color_reset</mat-icon>
+          <span>Without Color</span>
+        </button>
+        <button mat-menu-item *ngFor="let color of colors" (click)="setNoteColor(color.color)">
+          <mat-icon class="text-primary" *ngIf="note?.color === color.color">check</mat-icon>
+          <mat-icon [style.color]="color.color">palette</mat-icon>
+          <span>{{color.name}}</span>
+        </button>
+      </mat-menu>
+
+      <button mat-icon-button matTooltip="Change labels">
+        <mat-icon class="material-icons-outlined">label</mat-icon>
+      </button>
+
+      <button mat-icon-button matTooltip="Add image" (click)="imagePicker.click()">
+        <mat-icon class="material-icons-outlined">image</mat-icon>
+      </button>
+
+      <input type="file" accept="image/*" class="d-none" #imagePicker (change)="uploadImage($event)">
+
+      <button mat-icon-button matTooltip="Delete note">
+        <mat-icon class="material-icons-outlined">delete</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
