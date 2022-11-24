@@ -3,6 +3,8 @@ import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {Router} from "@angular/router";
 import firebase from 'firebase/compat/app'
 import {CURRENT_USER_LS} from "../../../core/constants/local-storage.constants";
+import {GlobalService} from "../../../core/services/global/global.service";
+import {ERROR_TOAST, SUCCESS_TOAST} from "../../../core/constants/toast.constants";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,8 @@ export class AuthService {
 
   constructor(
     private angularFireAuth: AngularFireAuth,
-    public router: Router
+    private router: Router,
+    private globalService: GlobalService
   ) {
   }
 
@@ -22,12 +25,15 @@ export class AuthService {
         if (res.user) {
           localStorage.setItem(CURRENT_USER_LS, JSON.stringify(res.user));
           this.router.navigate(['']);
+          this.globalService.showToast(SUCCESS_TOAST, 'Welcome', `You have logged in successfully. Welcome back ${res.user.displayName}!.`);
           resolve(res.user);
         } else {
           rejects();
         }
       }).catch((error) => {
         console.error('Error doing login with social networks', error);
+        this.globalService.showToast(ERROR_TOAST, 'Error doing log in', 'An error occurred while trying to log in, please try again later.');
+        rejects(error);
       });
     });
   }
@@ -48,10 +54,11 @@ export class AuthService {
 
   // Method to do log out
   async logout(): Promise<void> {
-    return new Promise<void>(async (resolve, rejects) => {
+    return new Promise<void>(async () => {
       await this.angularFireAuth.signOut();
       localStorage.removeItem(CURRENT_USER_LS);
       await this.router.navigate(['login']);
+      this.globalService.showToast(SUCCESS_TOAST, 'Goodbye', 'You have logged out successfully. See you soon!');
     })
   }
 }
