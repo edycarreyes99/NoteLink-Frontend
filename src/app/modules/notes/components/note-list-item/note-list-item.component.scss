@@ -1,6 +1,17 @@
 .note-list-item-component {
+  transition: box-shadow .3s;
+
+  &:hover {
+    box-shadow: 0 0 11px rgba(33, 33, 33, .2);
+    cursor: pointer;
+  }
+
   .note-card {
     width: 100%;
+
+    &:hover {
+      border: 2px solid black !important;
+    }
 
     .note-image {
       position: relative;
@@ -42,6 +53,14 @@
   .note-title, .note-description {
     border: none;
     padding: 0 !important;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:disabled {
+      background-color: transparent;
+    }
 
     &:focus {
       outline: none;

@@ -13,7 +13,8 @@ import {ERROR_TOAST, SUCCESS_TOAST} from "../../../../core/constants/toast.const
 })
 export class ManageNoteFormComponent {
   // Input Variables
-  @Input() note: any;
+  @Input() note: Note | undefined;
+  @Input() manageType: 'Create' | 'Update' = 'Create';
 
   // Output Variables
   @Output() noteSaved: EventEmitter<Note>;

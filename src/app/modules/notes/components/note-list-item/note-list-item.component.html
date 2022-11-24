@@ -1,4 +1,4 @@
-<div class="note-list-item-component">
+<div class="note-list-item-component rounded">
   <mat-card
     class="note-card rounded shadow-none border mb-4"
     [style.background-color]="note?.color">
@@ -26,7 +26,8 @@
           placeholder="Title"
           class="w-100 note-title fw-semibold text-dark"
           [value]="note!.title"
-          [style.background-color]="note?.color">
+          [style.background-color]="note?.color"
+        [disabled]="true">
       </mat-card-title>
       <mat-card-subtitle>
         Last updated: {{note?.updated_at | date: 'medium'}}
@@ -41,7 +42,8 @@
         cdkAutosizeMaxRows="28"
         cdkAutosizeMinRows="2"
         placeholder="Add a note..."
-        [style.background-color]="note?.color">
+        [style.background-color]="note?.color"
+      [disabled]="true">
       </textarea>
       <mat-divider></mat-divider>
     </mat-card-content>
@@ -78,5 +80,9 @@
         <mat-icon class="material-icons-outlined">delete</mat-icon>
       </button>
     </mat-card-actions>
+
+    <mat-card-footer *ngIf="loading">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </mat-card-footer>
   </mat-card>
 </div>

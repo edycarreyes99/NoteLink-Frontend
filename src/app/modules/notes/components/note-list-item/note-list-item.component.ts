@@ -3,6 +3,9 @@ import {Note} from "../../interfaces/note";
 import {UploadImageService} from "../../../../core/services/upload-image/upload-image.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ManageNoteModalComponent} from "../modals/manage-note-modal/manage-note-modal.component";
+import {NotesService} from "../../services/notes.service";
+import {GlobalService} from "../../../../core/services/global/global.service";
+import {ERROR_TOAST, SUCCESS_TOAST} from "../../../../core/constants/toast.constants";
 
 @Component({
   selector: 'app-note-list-item',
@@ -29,22 +32,31 @@ export class NoteListItemComponent {
     {name: 'Brown', color: 'rgb(230, 201, 168)'},
     {name: 'Gray', color: 'rgb(232, 234, 237)'},
   ];
+  loading = false;
 
   constructor(
     private uploadImageService: UploadImageService,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private notesService: NotesService,
+    private globalService: GlobalService,
   ) {
     this.noteManaged = new EventEmitter<Note>();
   }
 
   // Method to remove the image from the note
-  removeNoteImage(): void {
-    this.note!.images = [''];
+  removeNoteImage(): Promise<void> {
+    return new Promise<void>(async () => {
+      this.note!.images = [''];
+      await this.updateNote();
+    });
   }
 
   // Method to change the color of a note
-  setNoteColor(color: string | null): void {
-    this.note!.color = color;
+  async setNoteColor(color: string | null): Promise<void> {
+    return new Promise<void>(async () => {
+      this.note!.color = color;
+      await this.updateNote();
+    });
   }
 
   // Method to upload an image to firebase storage
@@ -52,11 +64,39 @@ export class NoteListItemComponent {
     return new Promise<string>(async (resolve, rejects) => {
       await this.uploadImageService
         .uploadImage(files.target.files[0])
-        .then((downloadUrl) => {
+        .then(async (downloadUrl) => {
           this.note!.images = [downloadUrl];
-          resolve(downloadUrl)
+          await this.updateNote().then(() => {
+            resolve(downloadUrl);
+          }).catch((error) => {
+            rejects(error);
+          });
         })
         .catch((error) => rejects(error));
+    });
+  }
+
+  // Method to update a note
+  updateNote(): Promise<Note> {
+    return new Promise<Note>(async (resolve, rejects) => {
+      this.loading = true;
+      await this.notesService.update(`${this.note!.id}`, this.note!)
+        .subscribe({
+          next: (updatedNote: Note) => {
+            console.log('Note updated successfully', updatedNote);
+            this.globalService.showToast(SUCCESS_TOAST, 'Note updated', 'Note updated successfully.');
+            this.note = updatedNote;
+            this.loading = false;
+            resolve(updatedNote);
+          },
+          error: (error) => {
+            console.error('Error updating note:', error);
+            this.globalService.showToast(ERROR_TOAST, 'Error updating note', 'An error occurred while updating the note. Please try again.');
+            this.loading = false;
+            this.noteManaged.emit({} as Note);
+            rejects(error);
+          }
+        });
     });
   }
 
