@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {Router} from "@angular/router";
-import firebase from 'firebase/compat/app'
+import firebase from 'firebase/compat/app';
 import {CURRENT_USER_LS} from "../../../core/constants/local-storage.constants";
 import {GlobalService} from "../../../core/services/global/global.service";
 import {ERROR_TOAST, SUCCESS_TOAST} from "../../../core/constants/toast.constants";
@@ -47,7 +47,7 @@ export class AuthService {
   }
 
   // Method to get the current user
-  getUser(): firebase.auth.UserCredential {
+  getUser(): firebase.User | undefined {
     const userData = localStorage.getItem(CURRENT_USER_LS);
     return JSON.parse(userData ?? '');
   }
@@ -57,7 +57,7 @@ export class AuthService {
     return new Promise<void>(async () => {
       await this.angularFireAuth.signOut();
       localStorage.removeItem(CURRENT_USER_LS);
-      await this.router.navigate(['login']);
+      await this.router.navigate(['auth']);
       this.globalService.showToast(SUCCESS_TOAST, 'Goodbye', 'You have logged out successfully. See you soon!');
     })
   }

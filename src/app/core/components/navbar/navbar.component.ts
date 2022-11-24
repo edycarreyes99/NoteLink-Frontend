@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import firebase from 'firebase/compat/app';
+import {AuthService} from "../../../modules/auth/services/auth.service";
 
 @Component({
   selector: 'app-navbar',
@@ -6,5 +8,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
+  // Component variables
+  user: firebase.User | undefined;
 
+  constructor(
+    private authService: AuthService
+  ) {
+    this.user = this.authService.getUser();
+  }
+
+  // Method to log out
+  async doLogout(): Promise<void> {
+    await this.authService.logout();
+  }
 }

@@ -18,6 +18,8 @@ import {environment} from "../environments/environment";
 import {HttpClientModule} from "@angular/common/http";
 import {ToastrModule} from "ngx-toastr";
 import {NgxMasonryModule} from "ngx-masonry";
+import {MatCardModule} from "@angular/material/card";
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import {NgxMasonryModule} from "ngx-masonry";
     AngularFireModule.initializeApp(environment.firebaseConfig),
     HttpClientModule,
     ToastrModule.forRoot(),
-    NgxMasonryModule
+    NgxMasonryModule,
+    MatCardModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
