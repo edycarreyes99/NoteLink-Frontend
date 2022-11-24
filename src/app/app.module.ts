@@ -12,11 +12,13 @@ import {MatLineModule} from "@angular/material/core";
 import {MatListModule} from "@angular/material/list";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
+import { NavbarComponent } from './core/components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SidenavComponent
+    SidenavComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
