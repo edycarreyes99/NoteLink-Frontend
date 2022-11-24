@@ -17,7 +17,7 @@ export class ManageNoteModalComponent {
     public modalData: { manageType: 'Update' | 'Delete', note: Note | undefined },
     private notesService: NotesService,
     private globalService: GlobalService,
-    private matDialogRef: MatDialogRef<ManageNoteModalComponent>
+    public matDialogRef: MatDialogRef<ManageNoteModalComponent>
   ) {
   }
 

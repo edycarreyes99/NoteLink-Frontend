@@ -1,8 +1,8 @@
-<div class="manage-note-modal-component">
+<div class="manage-note-modal-component" [style.background-color]="modalData.note!.color">
   <h1 mat-dialog-title *ngIf="modalData.manageType === 'Delete'">
     {{modalData.manageType}} Note
   </h1>
-  <div mat-dialog-content>
+  <div mat-dialog-content class="p-0 m-0" style="max-height: calc(100vh - 100px)">
     <div class="delete-modal" *ngIf="modalData.manageType === 'Delete'">
       Are you sure that you want to delete this note?
     </div>
@@ -10,7 +10,9 @@
     <div class="create-update-modal" *ngIf="modalData.manageType !== 'Delete'">
       <app-manage-note-form
         [note]="modalData.note"
-        [manageType]="modalData.manageType === 'Update' ? 'Update' : 'Create'">
+        [manageType]="modalData.manageType === 'Update' ? 'Update' : 'Create'"
+        (cancel)="matDialogRef.close(null);"
+        (noteSaved)="matDialogRef.close($event)">
       </app-manage-note-form>
     </div>
   </div>

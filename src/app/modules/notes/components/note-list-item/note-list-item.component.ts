@@ -87,25 +87,25 @@ export class NoteListItemComponent {
             this.globalService.showToast(SUCCESS_TOAST, 'Note updated', 'Note updated successfully.');
             this.note = updatedNote;
             this.loading = false;
+            this.noteManaged.emit(updatedNote);
             resolve(updatedNote);
           },
           error: (error) => {
             console.error('Error updating note:', error);
             this.globalService.showToast(ERROR_TOAST, 'Error updating note', 'An error occurred while updating the note. Please try again.');
             this.loading = false;
-            this.noteManaged.emit({} as Note);
             rejects(error);
           }
         });
     });
   }
 
-  // Method to delete a note
-  deleteNote(): void {
+  // Method to open the manage note modal
+  openManageNoteModal(manageType: 'Delete' | 'Update'): void {
     this.matDialog.open(ManageNoteModalComponent, {
       disableClose: true,
       data: {
-        manageType: 'Delete',
+        manageType,
         note: this.note,
       }
     }).afterClosed().subscribe({
@@ -117,6 +117,6 @@ export class NoteListItemComponent {
       error: (error) => {
         console.error('Error closing modal:', error);
       }
-    })
+    });
   }
 }

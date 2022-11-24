@@ -3,7 +3,7 @@
     class="note-card rounded shadow-none border mb-4"
     [style.background-color]="note?.color">
 
-    <div class="note-image" *ngIf="note!.images[0] !== ''">
+    <div class="note-image" *ngIf="note!.images[0] !== ''" (click)="openManageNoteModal('Update')">
       <img
         mat-card-image
         [src]="note!.images[0]"
@@ -19,7 +19,7 @@
       </button>
     </div>
 
-    <mat-card-header>
+    <mat-card-header (click)="openManageNoteModal('Update')">
       <mat-card-title>
         <input
           type="text"
@@ -34,7 +34,7 @@
       </mat-card-subtitle>
     </mat-card-header>
 
-    <mat-card-content>
+    <mat-card-content (click)="openManageNoteModal('Update')">
       <textarea
         [value]="note!.description"
         class="w-100 note-description mt-3 text-dark"
@@ -76,7 +76,7 @@
 
       <input type="file" accept="image/*" class="d-none" #imagePicker (change)="uploadImage($event)">
 
-      <button mat-icon-button matTooltip="Delete note" (click)="deleteNote()">
+      <button mat-icon-button matTooltip="Delete note" (click)="openManageNoteModal('Delete')">
         <mat-icon class="material-icons-outlined">delete</mat-icon>
       </button>
     </mat-card-actions>

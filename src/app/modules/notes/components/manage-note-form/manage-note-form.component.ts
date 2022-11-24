@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UploadImageService} from "../../../../core/services/upload-image/upload-image.service";
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {NotesService} from "../../services/notes.service";
@@ -11,13 +11,14 @@ import {ERROR_TOAST, SUCCESS_TOAST} from "../../../../core/constants/toast.const
   templateUrl: './manage-note-form.component.html',
   styleUrls: ['./manage-note-form.component.scss']
 })
-export class ManageNoteFormComponent {
+export class ManageNoteFormComponent implements OnInit {
   // Input Variables
   @Input() note: Note | undefined;
   @Input() manageType: 'Create' | 'Update' = 'Create';
 
   // Output Variables
   @Output() noteSaved: EventEmitter<Note>;
+  @Output() cancel: EventEmitter<void>;
 
   // Components variables
   description = '';
@@ -42,6 +43,7 @@ export class ManageNoteFormComponent {
     private globalService: GlobalService
   ) {
     this.noteSaved = new EventEmitter<Note>();
+    this.cancel = new EventEmitter<void>();
 
     this.noteForm = new FormGroup({
       id: new FormControl(null),
@@ -56,6 +58,13 @@ export class ManageNoteFormComponent {
       color: new FormControl(null, []),
       images: new FormControl([''], []),
     });
+  }
+
+  ngOnInit(): void {
+    console.log('Note', this.note);
+    if (this.note) {
+      this.noteForm.patchValue(this.note);
+    }
   }
 
   // Method to upload an image to firebase storage
@@ -95,6 +104,7 @@ export class ManageNoteFormComponent {
       color: null,
       images: ['']
     });
+    this.cancel.emit();
   }
 
   // Method to save a note

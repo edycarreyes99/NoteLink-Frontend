@@ -25,16 +25,20 @@
         <input
           type="text"
           placeholder="Title"
-          class="w-100 note-title fw-semibold text-dark"
+          class="w-100 fw-semibold text-dark"
+          [class.note-title]="manageType === 'Create'"
+          [class.note-title-updating]="manageType === 'Update'"
           formControlName="title"
           [style.background-color]="getControl('color')?.value">
       </mat-card-title>
       <mat-card-subtitle *ngIf="getControl('id')?.value !== null">
-        Last updated: 13 Oct 2020
+        Last updated: {{note!.updated_at | date: 'medium'}}
       </mat-card-subtitle>
     </mat-card-header>
 
-    <mat-card-content>
+    <mat-card-content
+      [style.margin-bottom.px]="manageType === 'Update' ? '60' : '0'"
+      [class.overflow-auto]="manageType === 'Update'">
       <textarea
         formControlName="description"
         class="w-100 note-description mt-3 text-dark"
@@ -47,7 +51,11 @@
       <mat-divider></mat-divider>
     </mat-card-content>
 
-    <mat-card-actions>
+    <mat-card-actions
+      [class.position-absolute]="manageType === 'Update'"
+      [class.bottom-0]="manageType === 'Update'"
+      [class.w-100]="manageType === 'Update'"
+      [style.background-color]="manageType === 'Update' ? 'transparent' : ''">
       <button mat-icon-button matTooltip="Change color" [matMenuTriggerFor]="aboveMenu">
         <mat-icon class="material-icons-outlined">palette</mat-icon>
       </button>
@@ -90,12 +98,12 @@
 
         <div
           class="save-button"
-          [matTooltip]="noteForm.invalid ? 'Title and Description are required with at least 3 characters' : 'Save note'">
+          [matTooltip]="noteForm.invalid ? 'Title and Description are required with at least 3 characters' : manageType === 'Create' ? 'Save note' : 'Update Note'">
           <button
             mat-flat-button
             (click)="saveNote()"
             [disabled]="noteForm.invalid || loading">
-            Save
+            {{manageType === 'Create' ? 'Save' : 'Update'}}
           </button>
         </div>
       </div>
