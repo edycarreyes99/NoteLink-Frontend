@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import {NotesModule} from "./modules/notes/notes.module";
 import { SidenavComponent } from './core/components/sidenav/sidenav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatLineModule} from "@angular/material/core";
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
   declarations: [
@@ -16,7 +20,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     NotesModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSidenavModule,
+    MatListModule,
+    MatTooltipModule,
+    MatLineModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
