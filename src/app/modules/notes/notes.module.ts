@@ -15,13 +15,15 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {NotesService} from "./services/notes.service";
 import { NoteListComponent } from './components/note-list/note-list.component';
+import { NoteListItemComponent } from './components/note-list-item/note-list-item.component';
 
 
 @NgModule({
   declarations: [
     NotesViewComponent,
     ManageNoteFormComponent,
-    NoteListComponent
+    NoteListComponent,
+    NoteListItemComponent
   ],
   imports: [
     CommonModule,

@@ -59,7 +59,6 @@ export class ManageNoteFormComponent {
         .uploadImage(files.target.files[0])
         .then((downloadUrl) => {
           this.getControl('images')?.setValue([downloadUrl]);
-          console.log('images', this.noteForm.getRawValue());
           resolve(downloadUrl)
         })
         .catch((error) => rejects(error));
