@@ -36,7 +36,8 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "./node_modules/bootstrap/dist/js/bootstrap.js"
+              "./node_modules/bootstrap/dist/js/bootstrap.js",
+              "./node_modules/masonry-layout/dist/masonry.pkgd.js"
             ]
           },
           "configurations": {
