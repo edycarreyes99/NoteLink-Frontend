@@ -17,6 +17,7 @@ import {NotesService} from "./services/notes.service";
 import { NoteListComponent } from './components/note-list/note-list.component';
 import { NoteListItemComponent } from './components/note-list-item/note-list-item.component';
 import {NgxMasonryModule} from "ngx-masonry";
+import { ManageNoteModalComponent } from './components/modals/manage-note-modal/manage-note-modal.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import {NgxMasonryModule} from "ngx-masonry";
     NotesViewComponent,
     ManageNoteFormComponent,
     NoteListComponent,
-    NoteListItemComponent
+    NoteListItemComponent,
+    ManageNoteModalComponent
   ],
   imports: [
     CommonModule,
