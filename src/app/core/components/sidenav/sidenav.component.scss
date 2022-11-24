@@ -1,4 +1,12 @@
 .sidenav-component {
+
+  .route-active {
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    border-radius: 0 25px 25px 0;
+    background-color: rgb(254, 239, 195);
+  }
+
   .sidenav {
     width: 100vw;
     height: 100vh;
@@ -9,6 +17,26 @@
   }
 
   .sidenav-container {
-    padding: 20px;
+    width: 280px;
+
+    mat-list{
+      min-height: calc(100vh - 50px);
+      max-height: calc(100vh - 50px);
+      overflow-y: auto;
+    }
+
+    a, mat-list-item {
+      box-sizing: border-box;
+      border: 1px solid transparent;
+      border-radius: 0 25px 25px 0;
+      padding-left: 1rem !important;
+
+      &:hover {
+        background-color: rgb(241, 243, 244);
+        box-sizing: border-box;
+        border: 1px solid transparent;
+        border-radius: 0 25px 25px 0;
+      }
+    }
   }
 }

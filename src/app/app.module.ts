@@ -10,6 +10,8 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatLineModule} from "@angular/material/core";
 import {MatListModule} from "@angular/material/list";
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import {MatListModule} from "@angular/material/list";
     MatListModule,
     MatTooltipModule,
     MatLineModule,
+    MatIconModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
