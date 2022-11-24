@@ -1,6 +1,9 @@
 <div class="note-list-component">
   <span class="text-secondary ms-2 fw-semibold">ALL NOTES</span>
-  <ngx-masonry [options]="{resize: true}" [ordered]="true">
+  <div class="empty-illustration d-flex justify-content-center align-items-center w-100">
+    <img src="../../../../../assets/img/empty-vector.png" alt="empty illustration" *ngIf="notes.length === 0">
+  </div>
+  <ngx-masonry [options]="{resize: true}" [ordered]="true" *ngIf="notes.length > 0">
     <div
       ngxMasonryItem
       [prepend]="true"

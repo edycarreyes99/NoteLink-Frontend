@@ -83,10 +83,6 @@
 
       <input type="file" accept="image/*" class="d-none" #imagePicker (change)="uploadImage($event)">
 
-      <button mat-icon-button matTooltip="Delete note" *ngIf="getControl('id')?.value !== null">
-        <mat-icon class="material-icons-outlined">delete</mat-icon>
-      </button>
-
       <div class="save-cancel-buttons ms-auto d-flex">
         <button
           mat-flat-button

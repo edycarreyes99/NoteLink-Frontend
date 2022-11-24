@@ -2,7 +2,11 @@
   <h1 mat-dialog-title *ngIf="modalData.manageType === 'Delete'">
     {{modalData.manageType}} Note
   </h1>
-  <div mat-dialog-content class="p-0 m-0" style="max-height: calc(100vh - 100px)">
+  <div
+    mat-dialog-content
+    [class.m-0]="modalData.manageType !== 'Delete'"
+    [class.p-0]="modalData.manageType !== 'Delete'"
+    style="max-height: calc(100vh - 100px)">
     <div class="delete-modal" *ngIf="modalData.manageType === 'Delete'">
       Are you sure that you want to delete this note?
     </div>

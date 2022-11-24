@@ -5,6 +5,7 @@ import {NotesService} from "../../services/notes.service";
 import {Note} from "../../interfaces/note";
 import {GlobalService} from "../../../../core/services/global/global.service";
 import {ERROR_TOAST, SUCCESS_TOAST} from "../../../../core/constants/toast.constants";
+import {AuthService} from "../../../auth/services/auth.service";
 
 @Component({
   selector: 'app-manage-note-form',
@@ -40,7 +41,8 @@ export class ManageNoteFormComponent implements OnInit {
   constructor(
     private uploadImageService: UploadImageService,
     private notesService: NotesService,
-    private globalService: GlobalService
+    private globalService: GlobalService,
+    private authService: AuthService
   ) {
     this.noteSaved = new EventEmitter<Note>();
     this.cancel = new EventEmitter<void>();
@@ -57,6 +59,7 @@ export class ManageNoteFormComponent implements OnInit {
       ]),
       color: new FormControl(null, []),
       images: new FormControl([''], []),
+      user_uid: new FormControl('', [])
     });
   }
 
@@ -113,6 +116,7 @@ export class ManageNoteFormComponent implements OnInit {
       const note: Note = this.noteForm.getRawValue();
       delete note.id;
       this.loading = true;
+      this.noteForm.get('user_uid')?.setValue(this.authService.getUser()?.uid);
       this.noteForm.disable();
 
       await this.notesService.store(this.noteForm.getRawValue()).subscribe((noteSaved) => {
