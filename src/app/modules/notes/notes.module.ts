@@ -11,6 +11,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {TextFieldModule} from "@angular/cdk/text-field";
 import {MatMenuModule} from "@angular/material/menu";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {MatMenuModule} from "@angular/material/menu";
     MatIconModule,
     MatTooltipModule,
     TextFieldModule,
-    MatMenuModule
+    MatMenuModule,
+    ReactiveFormsModule
   ]
 })
 export class NotesModule { }

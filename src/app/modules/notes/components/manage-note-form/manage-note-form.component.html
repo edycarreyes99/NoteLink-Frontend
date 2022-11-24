@@ -1,20 +1,28 @@
 <div class="manage-note-form-component">
-  <mat-card class="note-card">
+  <mat-card class="note-card" [formGroup]="noteForm" [style.background-color]="getControl('color')?.value">
     <mat-card-header>
       <mat-card-title>
-        <input type="text" placeholder="Title" class="w-100 note-title fw-semibold text-dark">
+        <input
+          type="text"
+          placeholder="Title"
+          class="w-100 note-title fw-semibold text-dark"
+          formControlName="title"
+          [style.background-color]="getControl('color')?.value">
       </mat-card-title>
-      <mat-card-subtitle>Last updated: 13 Oct 2020</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="getControl('id')?.value !== null">
+        Last updated: 13 Oct 2020
+      </mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content>
       <textarea
-        [value]="description"
-        class="w-100 note-description mt-3"
+        formControlName="description"
+        class="w-100 note-description mt-3 text-dark"
         cdkTextareaAutosize
         cdkAutosizeMaxRows="28"
         cdkAutosizeMinRows="2"
-        placeholder="Add a note...">
+        placeholder="Add a note..."
+        [style.background-color]="getControl('color')?.value">
       </textarea>
       <mat-divider></mat-divider>
     </mat-card-content>
@@ -25,7 +33,13 @@
       </button>
 
       <mat-menu #aboveMenu="matMenu" yPosition="above">
-        <button mat-menu-item *ngFor="let color of colors">
+        <button mat-menu-item (click)="setNoteColor(null)">
+          <mat-icon class="text-primary" *ngIf="getControl('color')?.value === null">check</mat-icon>
+          <mat-icon class="material-icons-outlined">format_color_reset</mat-icon>
+          <span>Without Color</span>
+        </button>
+        <button mat-menu-item *ngFor="let color of colors" (click)="setNoteColor(color.color)">
+          <mat-icon class="text-primary" *ngIf="getControl('color')?.value === color.color">check</mat-icon>
           <mat-icon [style.color]="color.color">palette</mat-icon>
           <span>{{color.name}}</span>
         </button>
