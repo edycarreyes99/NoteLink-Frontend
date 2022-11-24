@@ -1,3 +1,23 @@
 .manage-note-form-component {
+  .note-card {
+    max-width: 37.5rem;
+    min-width: 37.5rem;
+  }
 
+  .note-title {
+    font-size: 1rem !important;
+  }
+
+  .note-description{
+    font-size: 0.875rem !important;
+  }
+
+  .note-title, .note-description {
+    border: none;
+    padding: 0 !important;
+
+    &:focus{
+      outline: none;
+    }
+  }
 }

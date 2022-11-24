@@ -1,3 +1,53 @@
 <div class="manage-note-form-component">
-  <p>manage-note-form works!</p>
+  <mat-card class="note-card">
+    <mat-card-header>
+      <mat-card-title>
+        <input type="text" placeholder="Title" class="w-100 note-title fw-semibold text-dark">
+      </mat-card-title>
+      <mat-card-subtitle>Last updated: 13 Oct 2020</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <textarea
+        [value]="description"
+        class="w-100 note-description mt-3"
+        cdkTextareaAutosize
+        cdkAutosizeMaxRows="28"
+        cdkAutosizeMinRows="2"
+        placeholder="Add a note...">
+      </textarea>
+      <mat-divider></mat-divider>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-icon-button matTooltip="Change color" [matMenuTriggerFor]="aboveMenu">
+        <mat-icon class="material-icons-outlined">palette</mat-icon>
+      </button>
+
+      <mat-menu #aboveMenu="matMenu" yPosition="above">
+        <button mat-menu-item *ngFor="let color of colors">
+          <mat-icon [style.color]="color.color">palette</mat-icon>
+          <span>{{color.name}}</span>
+        </button>
+      </mat-menu>
+
+      <button mat-icon-button matTooltip="Change labels">
+        <mat-icon class="material-icons-outlined">label</mat-icon>
+      </button>
+
+      <button mat-icon-button matTooltip="Add image" (click)="imagePicker.click()">
+        <mat-icon class="material-icons-outlined">image</mat-icon>
+      </button>
+
+      <input type="file" class="d-none" #imagePicker>
+
+      <button mat-icon-button matTooltip="Delete note">
+        <mat-icon class="material-icons-outlined">delete</mat-icon>
+      </button>
+
+      <button mat-flat-button matTooltip="Close editing" class="ms-auto">
+        Close
+      </button>
+    </mat-card-actions>
+  </mat-card>
 </div>
