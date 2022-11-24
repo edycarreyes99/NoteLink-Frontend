@@ -1,22 +1,48 @@
+::placeholder {
+  color: black !important;
+}
+
 .manage-note-form-component {
   .note-card {
     max-width: 37.5rem;
     min-width: 37.5rem;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+
+    .note-image {
+      position: relative;
+
+      &:hover {
+        .delete-image-button {
+          display: block;
+        }
+      }
+
+      .delete-image-button {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.3);
+        display: none;
+      }
+    }
   }
 
   .note-title {
     font-size: 1rem !important;
   }
 
-  .note-description{
+  .note-description {
     font-size: 0.875rem !important;
+    overflow: hidden;
   }
 
   .note-title, .note-description {
     border: none;
     padding: 0 !important;
 
-    &:focus{
+    &:focus {
       outline: none;
     }
   }

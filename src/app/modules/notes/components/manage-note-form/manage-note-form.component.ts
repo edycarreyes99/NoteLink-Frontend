@@ -35,7 +35,7 @@ export class ManageNoteFormComponent {
       title: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       color: new FormControl(null, []),
-      image: new FormControl([''], []),
+      images: new FormControl([''], []),
     });
   }
 
@@ -44,7 +44,11 @@ export class ManageNoteFormComponent {
     return new Promise<string>(async (resolve, rejects) => {
       await this.uploadImageService
         .uploadImage(files.target.files[0])
-        .then((downloadUrl) => resolve(downloadUrl))
+        .then((downloadUrl) => {
+          this.getControl('images')?.setValue([downloadUrl]);
+          console.log('images', this.noteForm.getRawValue());
+          resolve(downloadUrl)
+        })
         .catch((error) => rejects(error));
     });
   }
@@ -57,6 +61,10 @@ export class ManageNoteFormComponent {
   // Method to change the color of a note
   setNoteColor(color: string | null): void {
     this.getControl('color')?.setValue(color);
-    console.log('color', this.getControl('color')?.value);
+  }
+
+  // Method to remove the image from the note
+  removeNoteImage(): void {
+    this.getControl('images')?.setValue(['']);
   }
 }

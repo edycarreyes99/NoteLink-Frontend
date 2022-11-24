@@ -1,5 +1,21 @@
 <div class="manage-note-form-component">
-  <mat-card class="note-card" [formGroup]="noteForm" [style.background-color]="getControl('color')?.value">
+  <mat-card
+    class="note-card rounded shadow-none border"
+    [formGroup]="noteForm"
+    [style.background-color]="getControl('color')?.value">
+
+    <div class="note-image" *ngIf="getControl('images')?.value[0] !== ''">
+      <img
+        mat-card-image
+        [src]="getControl('images')?.value[0]"
+        class="w-100"
+        alt="Note Image">
+
+      <button mat-icon-button class="delete-image-button" matTooltip="Remove Image" (click)="removeNoteImage(); imagePicker.value = ''">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+
     <mat-card-header>
       <mat-card-title>
         <input
@@ -60,7 +76,7 @@
       </button>
 
       <button mat-flat-button matTooltip="Close editing" class="ms-auto">
-        Close
+        Cancel
       </button>
     </mat-card-actions>
   </mat-card>
