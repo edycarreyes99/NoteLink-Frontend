@@ -16,6 +16,7 @@ import { NavbarComponent } from './core/components/navbar/navbar.component';
 import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../environments/environment";
 import {HttpClientModule} from "@angular/common/http";
+import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {HttpClientModule} from "@angular/common/http";
     MatIconModule,
     MatButtonModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
