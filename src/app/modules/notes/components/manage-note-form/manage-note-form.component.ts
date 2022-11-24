@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {UploadImageService} from "../../../../core/services/upload-image/upload-image.service";
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {NotesService} from "../../services/notes.service";
@@ -14,6 +14,9 @@ import {ERROR_TOAST, SUCCESS_TOAST} from "../../../../core/constants/toast.const
 export class ManageNoteFormComponent {
   // Input Variables
   @Input() note: any;
+
+  // Output Variables
+  @Output() noteSaved: EventEmitter<Note>;
 
   // Components variables
   description = '';
@@ -37,6 +40,8 @@ export class ManageNoteFormComponent {
     private notesService: NotesService,
     private globalService: GlobalService
   ) {
+    this.noteSaved = new EventEmitter<Note>();
+
     this.noteForm = new FormGroup({
       id: new FormControl(null),
       title: new FormControl('', [
@@ -105,6 +110,7 @@ export class ManageNoteFormComponent {
         this.noteForm.enable();
         this.clearNoteForm();
         this.globalService.showToast(SUCCESS_TOAST, 'Note saved', 'The note was saved successfully!.');
+        this.noteSaved.emit(noteSaved);
         resolve(noteSaved);
       }, (error) => {
         console.error('Error saving note', error);

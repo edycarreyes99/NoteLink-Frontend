@@ -1,7 +1,7 @@
 import {Observable} from 'rxjs';
 
 export interface ICRUD<T, I> {
-  index(params: any): Observable<I>;
+  index(params?: any): Observable<I>;
 
   store(body: T): Observable<T>;
 

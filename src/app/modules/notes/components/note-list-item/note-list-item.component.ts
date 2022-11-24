@@ -52,4 +52,9 @@ export class NoteListItemComponent {
         .catch((error) => rejects(error));
     });
   }
+
+  // Method to delete a note
+  deleteNote() {
+
+  }
 }

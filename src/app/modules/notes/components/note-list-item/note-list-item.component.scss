@@ -1,0 +1,50 @@
+.note-list-item-component {
+  .note-card {
+    width: 100%;
+
+    .note-image {
+      position: relative;
+
+      &:hover {
+        .delete-image-button {
+          display: block;
+        }
+      }
+
+      .delete-image-button {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.3);
+        display: none;
+      }
+    }
+
+    mat-card-actions {
+      .save-cancel-buttons {
+        button {
+          background-color: transparent !important;
+        }
+      }
+    }
+  }
+
+  .note-title {
+    font-size: 1rem !important;
+  }
+
+  .note-description {
+    font-size: 0.875rem !important;
+    overflow: hidden;
+  }
+
+  .note-title, .note-description {
+    border: none;
+    padding: 0 !important;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

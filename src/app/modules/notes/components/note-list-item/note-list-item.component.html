@@ -1,12 +1,12 @@
 <div class="note-list-item-component">
   <mat-card
-    class="note-card rounded shadow-none border"
+    class="note-card rounded shadow-none border mb-4"
     [style.background-color]="note?.color">
 
-    <div class="note-image" *ngIf="note?.images[0] !== ''">
+    <div class="note-image" *ngIf="note!.images[0] !== ''">
       <img
         mat-card-image
-        [src]="note?.images[0]"
+        [src]="note!.images[0]"
         class="w-100"
         alt="Note Image">
 
@@ -74,7 +74,7 @@
 
       <input type="file" accept="image/*" class="d-none" #imagePicker (change)="uploadImage($event)">
 
-      <button mat-icon-button matTooltip="Delete note">
+      <button mat-icon-button matTooltip="Delete note" (click)="deleteNote()">
         <mat-icon class="material-icons-outlined">delete</mat-icon>
       </button>
     </mat-card-actions>

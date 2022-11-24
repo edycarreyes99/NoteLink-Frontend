@@ -16,6 +16,7 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {NotesService} from "./services/notes.service";
 import { NoteListComponent } from './components/note-list/note-list.component';
 import { NoteListItemComponent } from './components/note-list-item/note-list-item.component';
+import {NgxMasonryModule} from "ngx-masonry";
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { NoteListItemComponent } from './components/note-list-item/note-list-ite
     TextFieldModule,
     MatMenuModule,
     ReactiveFormsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    NgxMasonryModule
   ],
   providers: [NotesService]
 })

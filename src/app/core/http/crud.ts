@@ -10,7 +10,7 @@ export abstract class CRUD<T, I> implements ICRUD<T, I> {
   ) {
   }
 
-  index(params: any): Observable<I> {
+  index(params?: any): Observable<I> {
     return this.http.get<I>(`${this.url}`, {
       params: {
         ...params,
