@@ -80,7 +80,11 @@
       </button>
 
       <div class="save-cancel-buttons ms-auto d-flex">
-        <button mat-flat-button matTooltip="Clear note form" (click)="clearNoteForm()">
+        <button
+          mat-flat-button
+          matTooltip="Clear note form"
+          (click)="clearNoteForm()"
+          [disabled]="loading">
           Cancel
         </button>
 
@@ -90,11 +94,15 @@
           <button
             mat-flat-button
             (click)="saveNote()"
-            [disabled]="noteForm.invalid">
+            [disabled]="noteForm.invalid || loading">
             Save
           </button>
         </div>
       </div>
     </mat-card-actions>
+
+    <mat-card-footer *ngIf="loading">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </mat-card-footer>
   </mat-card>
 </div>

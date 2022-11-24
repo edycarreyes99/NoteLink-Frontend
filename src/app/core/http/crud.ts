@@ -18,12 +18,8 @@ export abstract class CRUD<T, I> implements ICRUD<T, I> {
     });
   }
 
-  create(params?: any): Observable<any> {
-    return this.http.get<any>(this.url + '/create', {
-      params: {
-        ...params
-      }
-    });
+  store(body: T): Observable<T> {
+    return this.http.post<T>(this.url, body);
   }
 
   show(

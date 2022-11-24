@@ -15,6 +15,7 @@ import {MatButtonModule} from "@angular/material/button";
 import { NavbarComponent } from './core/components/navbar/navbar.component';
 import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../environments/environment";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {environment} from "../environments/environment";
     MatLineModule,
     MatIconModule,
     MatButtonModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

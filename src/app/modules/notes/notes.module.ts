@@ -12,6 +12,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {TextFieldModule} from "@angular/cdk/text-field";
 import {MatMenuModule} from "@angular/material/menu";
 import {ReactiveFormsModule} from "@angular/forms";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {NotesService} from "./services/notes.service";
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import {ReactiveFormsModule} from "@angular/forms";
     MatTooltipModule,
     TextFieldModule,
     MatMenuModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    MatProgressBarModule
+  ],
+  providers: [NotesService]
 })
 export class NotesModule { }

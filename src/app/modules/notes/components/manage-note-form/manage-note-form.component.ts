@@ -1,6 +1,8 @@
 import {Component, Input} from '@angular/core';
 import {UploadImageService} from "../../../../core/services/upload-image/upload-image.service";
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
+import {NotesService} from "../../services/notes.service";
+import {Note} from "../../interfaces/note";
 
 @Component({
   selector: 'app-manage-note-form',
@@ -26,9 +28,11 @@ export class ManageNoteFormComponent {
     {name: 'Gray', color: 'rgb(232, 234, 237)'},
   ];
   noteForm: FormGroup;
+  loading = false;
 
   constructor(
     private uploadImageService: UploadImageService,
+    private notesService: NotesService
   ) {
     this.noteForm = new FormGroup({
       id: new FormControl(null),
@@ -86,9 +90,25 @@ export class ManageNoteFormComponent {
   }
 
   // Method to save a note
-  saveNote(): Promise<string> {
-    return new Promise<string>(async (resolve, rejects) => {
+  saveNote(): Promise<Note> {
+    return new Promise<Note>(async (resolve, rejects) => {
+      const note: Note = this.noteForm.getRawValue();
+      delete note.id;
+      this.loading = true;
+      this.noteForm.disable();
 
+      await this.notesService.store(this.noteForm.getRawValue()).subscribe((noteSaved) => {
+        console.log('Note saved successfully', noteSaved);
+        this.loading = false;
+        this.noteForm.enable();
+        this.clearNoteForm();
+        resolve(noteSaved);
+      }, (error) => {
+        console.error('Error saving note', error);
+        this.loading = false;
+        this.noteForm.enable();
+        rejects(error);
+      })
     });
   }
 }
