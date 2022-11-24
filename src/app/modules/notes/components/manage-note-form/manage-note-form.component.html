@@ -75,13 +75,26 @@
 
       <input type="file" accept="image/*" class="d-none" #imagePicker (change)="uploadImage($event)">
 
-      <button mat-icon-button matTooltip="Delete note">
+      <button mat-icon-button matTooltip="Delete note" *ngIf="getControl('id')?.value !== null">
         <mat-icon class="material-icons-outlined">delete</mat-icon>
       </button>
 
-      <button mat-flat-button matTooltip="Close editing" class="ms-auto" (click)="clearNoteForm()">
-        Cancel
-      </button>
+      <div class="save-cancel-buttons ms-auto d-flex">
+        <button mat-flat-button matTooltip="Clear note form" (click)="clearNoteForm()">
+          Cancel
+        </button>
+
+        <div
+          class="save-button"
+          [matTooltip]="noteForm.invalid ? 'Title and Description are required with at least 3 characters' : 'Save note'">
+          <button
+            mat-flat-button
+            (click)="saveNote()"
+            [disabled]="noteForm.invalid">
+            Save
+          </button>
+        </div>
+      </div>
     </mat-card-actions>
   </mat-card>
 </div>

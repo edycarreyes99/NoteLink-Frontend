@@ -27,6 +27,14 @@
         display: none;
       }
     }
+
+    mat-card-actions {
+      .save-cancel-buttons {
+        button {
+          background-color: transparent !important;
+        }
+      }
+    }
   }
 
   .note-title {

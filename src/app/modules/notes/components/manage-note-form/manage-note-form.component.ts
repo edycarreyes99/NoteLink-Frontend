@@ -32,8 +32,14 @@ export class ManageNoteFormComponent {
   ) {
     this.noteForm = new FormGroup({
       id: new FormControl(null),
-      title: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required]),
+      title: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3)
+      ]),
+      description: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3)
+      ]),
       color: new FormControl(null, []),
       images: new FormControl([''], []),
     });
@@ -76,6 +82,13 @@ export class ManageNoteFormComponent {
       description: '',
       color: null,
       images: ['']
+    });
+  }
+
+  // Method to save a note
+  saveNote(): Promise<string> {
+    return new Promise<string>(async (resolve, rejects) => {
+
     });
   }
 }
