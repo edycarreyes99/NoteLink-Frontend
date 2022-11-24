@@ -3,6 +3,8 @@ import {UploadImageService} from "../../../../core/services/upload-image/upload-
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {NotesService} from "../../services/notes.service";
 import {Note} from "../../interfaces/note";
+import {GlobalService} from "../../../../core/services/global/global.service";
+import {ERROR_TOAST, SUCCESS_TOAST} from "../../../../core/constants/toast.constants";
 
 @Component({
   selector: 'app-manage-note-form',
@@ -32,7 +34,8 @@ export class ManageNoteFormComponent {
 
   constructor(
     private uploadImageService: UploadImageService,
-    private notesService: NotesService
+    private notesService: NotesService,
+    private globalService: GlobalService
   ) {
     this.noteForm = new FormGroup({
       id: new FormControl(null),
@@ -102,11 +105,13 @@ export class ManageNoteFormComponent {
         this.loading = false;
         this.noteForm.enable();
         this.clearNoteForm();
+        this.globalService.showToast(SUCCESS_TOAST, 'Note saved', 'The note was saved successfully!.');
         resolve(noteSaved);
       }, (error) => {
         console.error('Error saving note', error);
         this.loading = false;
         this.noteForm.enable();
+        this.globalService.showToast(ERROR_TOAST, 'Error saving note', 'An error occurred while saving the note, please try again.');
         rejects(error);
       })
     });
