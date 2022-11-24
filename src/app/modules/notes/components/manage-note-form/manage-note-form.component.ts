@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {UploadImageService} from "../../../../core/services/upload-image/upload-image.service";
 
 @Component({
   selector: 'app-manage-note-form',
@@ -6,6 +7,7 @@ import {Component} from '@angular/core';
   styleUrls: ['./manage-note-form.component.scss']
 })
 export class ManageNoteFormComponent {
+  // Components variables
   description = '';
   colors: { name: string, color: string }[] = [
     {name: 'Red', color: 'rgb(242, 139, 130)'},
@@ -19,4 +21,19 @@ export class ManageNoteFormComponent {
     {name: 'Brown', color: 'rgb(230, 201, 168)'},
     {name: 'Gray', color: 'rgb(232, 234, 237)'},
   ]
+
+  constructor(
+    private uploadImageService: UploadImageService,
+  ) {
+  }
+
+  // Method to upload an image to firebase storage
+  async uploadImage(files: any): Promise<string> {
+    return new Promise<string>(async (resolve, rejects) => {
+      await this.uploadImageService
+        .uploadImage(files.target.files[0])
+        .then((downloadUrl) => resolve(downloadUrl))
+        .catch((error) => rejects(error));
+    });
+  }
 }

@@ -39,7 +39,7 @@
         <mat-icon class="material-icons-outlined">image</mat-icon>
       </button>
 
-      <input type="file" class="d-none" #imagePicker>
+      <input type="file" accept="image/*" class="d-none" #imagePicker (change)="uploadImage($event)">
 
       <button mat-icon-button matTooltip="Delete note">
         <mat-icon class="material-icons-outlined">delete</mat-icon>

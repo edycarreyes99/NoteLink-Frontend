@@ -13,6 +13,8 @@ import {MatListModule} from "@angular/material/list";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import { NavbarComponent } from './core/components/navbar/navbar.component';
+import {AngularFireModule} from "@angular/fire/compat";
+import {environment} from "../environments/environment";
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { NavbarComponent } from './core/components/navbar/navbar.component';
     MatLineModule,
     MatIconModule,
     MatButtonModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]
