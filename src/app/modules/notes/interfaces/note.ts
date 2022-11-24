@@ -3,5 +3,5 @@ export interface Note {
   title: string;
   description: string;
   images: string[];
-  color: string;
+  color: string | null;
 }
