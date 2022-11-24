@@ -9,7 +9,7 @@ import {AuthService} from "../../../modules/auth/services/auth.service";
 })
 export class NavbarComponent {
   // Component variables
-  user: firebase.User | undefined;
+  user: firebase.User | null;
 
   constructor(
     private authService: AuthService

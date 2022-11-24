@@ -47,9 +47,27 @@ export class AuthService {
   }
 
   // Method to get the current user
-  getUser(): firebase.User | undefined {
+  getUser(): firebase.User | null {
     const userData = localStorage.getItem(CURRENT_USER_LS);
-    return JSON.parse(userData ?? '');
+    return userData ? JSON.parse(userData ?? '') : null;
+  }
+
+  // Method to get the current user JWT
+  public getToken(): Promise<string> {
+    return new Promise((resolve, reject) => {
+      this.angularFireAuth.authState.subscribe({
+        next: async (user) => {
+          if (user) {
+            const token = await user.getIdToken();
+            resolve(token);
+          }
+        },
+        error: (error) => {
+          console.error('Error fetching user JWT', error);
+          reject(error);
+        }
+      });
+    });
   }
 
   // Method to do log out
