@@ -14,12 +14,14 @@ import {MatMenuModule} from "@angular/material/menu";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {NotesService} from "./services/notes.service";
+import { NoteListComponent } from './components/note-list/note-list.component';
 
 
 @NgModule({
   declarations: [
     NotesViewComponent,
-    ManageNoteFormComponent
+    ManageNoteFormComponent,
+    NoteListComponent
   ],
   imports: [
     CommonModule,
