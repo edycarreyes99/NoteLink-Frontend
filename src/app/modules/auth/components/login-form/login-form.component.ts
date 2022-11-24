@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class LoginFormComponent {
 
+  // Method to log in with Google
+  loginWithGoogle() {
+
+  }
 }

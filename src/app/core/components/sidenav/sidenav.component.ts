@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-sidenav',
@@ -6,8 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./sidenav.component.scss']
 })
 export class SidenavComponent {
-  // Component variables
-  sidenavOpened = true;
+  // Input variables
+  @Input() sidenavOpened = false;
 
   // Method to open or close the sidenav
   openCloseSidenav() {

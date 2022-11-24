@@ -1,2 +1,4 @@
-<app-navbar></app-navbar>
-<app-sidenav></app-sidenav>
+<div *ngIf="showNavigations">
+  <app-navbar></app-navbar>
+</div>
+<app-sidenav [sidenavOpened]="showNavigations"></app-sidenav>

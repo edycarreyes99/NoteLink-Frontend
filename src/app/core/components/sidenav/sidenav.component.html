@@ -1,5 +1,5 @@
 <div class="sidenav-component">
-  <mat-drawer-container class="sidenav" autosize>
+  <mat-drawer-container class="sidenav" autosize [style.height]="sidenavOpened ? 'calc(100vh - 70px)' : '100vh'">
     <mat-drawer class="sidenav-container bg-light" mode="side" [(opened)]="sidenavOpened">
       <mat-list>
         <a mat-list-item [routerLink]="'/notes'" routerLinkActive="route-active">
@@ -23,7 +23,7 @@
     </mat-drawer>
 
     <div class="content bg-light">
-      <div class="container-fluid pt-4">
+      <div [class.container-fluid]="sidenavOpened" [class.pt-4]="sidenavOpened">
         <router-outlet></router-outlet>
       </div>
     </div>
