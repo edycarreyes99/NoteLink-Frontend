@@ -9,7 +9,7 @@
 
   .sidenav {
     width: 100vw;
-    height: calc(100vh - 70px);
+    height: calc(100vh - 100px);
   }
 
   .content {
@@ -21,8 +21,8 @@
     border: none !important;
 
     mat-list{
-      min-height: calc(100vh - 110px);
-      max-height: calc(100vh - 110px);
+      min-height: calc(100vh - 130px);
+      max-height: calc(100vh - 130px);
       overflow-y: auto;
     }
 

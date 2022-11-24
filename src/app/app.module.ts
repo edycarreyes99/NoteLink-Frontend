@@ -15,11 +15,12 @@ import {MatButtonModule} from "@angular/material/button";
 import { NavbarComponent } from './core/components/navbar/navbar.component';
 import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../environments/environment";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {ToastrModule} from "ngx-toastr";
 import {NgxMasonryModule} from "ngx-masonry";
 import {MatCardModule} from "@angular/material/card";
 import {MatMenuModule} from "@angular/material/menu";
+import {NoteLinkHttpInterceptor} from "./core/http/interceptors/notelink-http-interceptor.service";
 
 @NgModule({
   declarations: [
@@ -45,7 +46,13 @@ import {MatMenuModule} from "@angular/material/menu";
     MatCardModule,
     MatMenuModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: NoteLinkHttpInterceptor,
+      multi: true
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
